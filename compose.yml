@@ -1,0 +1,32 @@
+name: komaroff-linea-demo
+services:
+  db:
+    image: mariadb:10.11@sha256:d769e37960821dfdcf096954f6e7ac89f747e116c1bba98e48edd265dfc7deae
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Run python bootstrap.py}
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: ${DB_PASSWORD:?Run python bootstrap.py}
+    volumes: [database:/var/lib/mysql]
+  wordpress:
+    image: wordpress:php8.3-apache@sha256:1f59452d2ceed177ad383d17b3a6a7a5c8225d89e34adb36880af8603ac244c2
+    restart: unless-stopped
+    ports: ['127.0.0.1:${PORT:-8080}:80']
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+      WORDPRESS_CONFIG_EXTRA: |
+        define('DISALLOW_FILE_EDIT', true);
+        define('WP_ENVIRONMENT_TYPE', 'staging');
+        if (isset($$_SERVER['HTTP_X_FORWARDED_PROTO']) && $$_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https') $$_SERVER['HTTPS'] = 'on';
+    volumes:
+      - wordpress:/var/www/html
+      - ./theme:/var/www/html/wp-content/themes/komaroff-linea:ro
+      - ./plugins/komaroff-demo:/var/www/html/wp-content/plugins/komaroff-demo:ro
+    depends_on: [db]
+volumes:
+  database:
+  wordpress:

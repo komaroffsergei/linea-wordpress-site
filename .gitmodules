@@ -1,0 +1,6 @@
+[submodule "theme"]
+	path = theme
+	url = https://github.com/komaroffsergei/wordpress-theme-linea.git
+[submodule "plugins/komaroff-demo"]
+	path = plugins/komaroff-demo
+	url = https://github.com/komaroffsergei/wordpress-demo-content.git

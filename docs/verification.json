@@ -1,0 +1,36 @@
+{
+  "verified_on": "2026-11-05",
+  "public_site": {
+    "site": "linea",
+    "status": 200,
+    "strictHTTPS": true,
+    "title": "ЛИНИЯ — Архитектура для жизни",
+    "screens": [
+      {
+        "width": 1440,
+        "overflow": false,
+        "navigationVisible": true,
+        "menuVisible": false,
+        "brokenImages": 0
+      },
+      {
+        "width": 768,
+        "overflow": false,
+        "navigationVisible": true,
+        "menuVisible": false,
+        "brokenImages": 0
+      },
+      {
+        "width": 390,
+        "overflow": false,
+        "navigationVisible": false,
+        "menuVisible": true,
+        "brokenImages": 0
+      }
+    ],
+    "errors": [],
+    "/about/": 200,
+    "/contacts/": 200,
+    "/does-not-exist-9187/": 404
+  }
+}
